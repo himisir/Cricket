@@ -66,7 +66,7 @@ int main()
     srand(time(0));
 
 
-    int ball, over, level, players, over_count, oover, fh,f, r, i, j, k, l, x, y, c, final_run[100], run[100];
+    int ball, over, level, players, over_count, oover, End, fh,f, r, i, j, k, l, x, y, c, final_run[100], run[100];
     string name[100];
 
 
@@ -113,6 +113,7 @@ int main()
         oover=0;
         fh=0;
         run[i]=0;
+        End=0;
 
         for(ball=1; ball<=over*6; ball++)
         {
@@ -203,10 +204,25 @@ int main()
                 }
 
             }
+            if(i!=0&&i==players-1)
+            {
+                if(run[i]>run[i-1])
+                {
+                    final_run[i]=run[i];
+                    End=1;
+                    break;
+
+                }
+                else End=0;
+            }
 
         }
-        cout<<"\n\nEnd of your innings "<<name[i]<<"!\n\n";
+
+
         final_run[i]=run[i];
+
+        if(End==0) cout<<"\n\nEnd of your innings "<<name[i]<<"!\n\n";
+
     }
 
 
