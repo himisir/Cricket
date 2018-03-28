@@ -21,13 +21,14 @@ void wicket(void)
     }
 }
 
+
 int ball_check(int ball)
 {
     int Ball_Check;
     Ball_Check=(rand()%10000+ball)%5000+1;
     if(Ball_Check%2==1&&Ball_Check%7==0) return 2;
     else if(Ball_Check%11==0&&Ball_Check%2==0) return 3;
-    else if(Ball_Check%13==0&&Ball_Check%2!=0||Ball_Check%10==0) return 4;
+    else if(Ball_Check%13==0&&Ball_Check%21==0||Ball_Check%12==0) return 4;
 
     return 1;
 }
@@ -66,7 +67,7 @@ int main()
     srand(time(0));
 
 
-    int ball, over, level, players, over_count, oover, End, fh,f, r, i, j, k, l, x, y, c, final_run[100], run[100];
+    int ball, over, level, players, over_count, oover, runn, End, fh,f, r, i, j, k, l, x, y, c, final_run[100], run[100];
     string name[100];
 
 
@@ -77,12 +78,13 @@ int main()
     cout<<"Select overs :\n1 Overs\n2 Overs\n5 Overs\n";
     cin>>over;
 
+
     if(over==1) over=1;
     else if(over==2) over =2;
     else if(over==5) over=5;
     else over=1;
 
-    //Number of Players
+
 
     cout<<"\n\nNumbers of Players: \n";
     cin>>players;
@@ -105,6 +107,7 @@ int main()
 
 
 
+    runn=0;
 
     for(i=0; i<players; i++)
     {
@@ -143,6 +146,7 @@ int main()
             {
                 if(fh==1)
                 {
+                    fh=0;
                     f=free_hit();
                     run[i]+=f;
 
@@ -158,6 +162,7 @@ int main()
 
                         else
                         {
+                            cout<<"Free Hit\n"<<f<<"\n";
                             cout<<run[i]<<"/"<<oover<<"."<<ball%6<<"\n";
                         }
                 }
@@ -206,7 +211,7 @@ int main()
             }
             if(i!=0&&i==players-1)
             {
-                if(run[i]>run[i-1])
+                if(run[i]>runn)
                 {
                     final_run[i]=run[i];
                     End=1;
@@ -215,6 +220,7 @@ int main()
                 }
                 else End=0;
             }
+            if(run[i]>runn) runn=run[i];
 
         }
 
@@ -279,6 +285,8 @@ int main()
             cout<<""<<i+1<<".\t"<<name[j]<<"\t---- "<<run[i]<<"\n";
 
         }
+
+
 
         cout<<"\n\nPress: \n\n";
         cout<<"ANOTHER GAME ==> 1\n"<<"QUIT         ==> 0\n";
